@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="YoutubePlaylistDownloader.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             Margin="5"
+             Width="{Binding ActualWidth, ElementName=Skeleton}"
+             FlowDirection="{DynamicResource FlowDirection}">
+
+    <StackPanel>
+        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource Title}" FontSize="24" Foreground="{DynamicResource AccentColorBrush}" Margin="5" />
+
+        <Controls:MetroAnimatedTabControl x:Name="MetroAnimatedTabControl">
+            <Controls:MetroTabItem Header="{DynamicResource Search}">
+                <StackPanel x:Name="SearchPlaylistStackPanel" MinWidth="1200" >
+                    <WrapPanel x:Name="HeadlineStackPanel" HorizontalAlignment="Stretch" >
+                        <Controls:Tile Width="32.5" Height="32.5" HorizontalAlignment="Left" Margin="7.5,0,0,0" Click="Tile_Click" >
+                            <iconPacks:PackIconModern Kind="Cog" Width="27.5" Height="27.5" Margin="2.5" />
+                        </Controls:Tile>
+                        <TextBox HorizontalAlignment="Stretch" Width="1150" x:Name="PlaylistLinkTextBox" Margin="5" FontSize="18" TextChanged="TextBox_TextChanged" Style="{StaticResource SeachBarPlaceHolder}" Tag="{DynamicResource InsertYoutubePlaylistLinkHere}"  />
+                    </WrapPanel>
+                    <ScrollViewer x:Name="GridScrollViewer" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Grid Visibility="Collapsed" x:Name="PlaylistInfoGrid" Margin="7,0" HorizontalAlignment="Left" Width="Auto" MaxHeight="410" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--Col 0-->
+                                <Image x:Name="PlaylistInfoImage" Margin="0,0,10,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" MaxWidth="320" MaxHeight="180" />
+
+                                <!--Col 1-->
+                                <TextBlock Text="{DynamicResource PlaylistTitle}" Grid.Row="0" Grid.Column="1" FontSize="14" />
+                                <TextBlock Text="{DynamicResource Author}"        Grid.Row="1" Grid.Column="1" FontSize="14"/>
+                                <TextBlock Text="{DynamicResource Views}"         Grid.Row="2" Grid.Column="1" FontSize="14"/>
+                                <TextBlock Text="{DynamicResource TotalVideos}"   Grid.Row="3" Grid.Column="1" FontSize="14" x:Name="PlaylistTotalVideosTextBlockText" />
+
+                                <!--Col 2-->
+
+                                <TextBlock x:Name="PlaylistTitleTextBlock"        Grid.Row="0" Grid.Column="2" FontSize="14"/>
+                                <TextBlock x:Name="PlaylistAuthorTextBlock"       Grid.Row="1" Grid.Column="2" FontSize="14"/>
+                                <TextBlock x:Name="PlaylistViewsTextBlock"        Grid.Row="2" Grid.Column="2" FontSize="14"/>
+                                <TextBlock x:Name="PlaylistTotalVideosTextBlock"  Grid.Row="3" Grid.Column="2" FontSize="14"/>
+
+                            </Grid>
+                            <WrapPanel HorizontalAlignment="Center">
+                                <Controls:Tile Style="{DynamicResource SmallTileStyle}" x:Name="DownloadButton" Title="{DynamicResource Download}" IsEnabled="False" Click="DownloadButton_Click">
+                                    <iconPacks:PackIconModern Width="40" Height="40" Kind="ArrowDown" />
+                                </Controls:Tile>
+                                <Controls:Tile Style="{DynamicResource SmallTileStyle}" x:Name="DownloadInBackgroundButton" Title="{DynamicResource DownloadInBackground}" IsEnabled="False" Click="DownloadInBackgroundButton_Click">
+                                    <iconPacks:PackIconModern Width="40" Height="40" Kind="Reset" />
+                                </Controls:Tile>
+                            </WrapPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+
+            </Controls:MetroTabItem>
+            <Controls:MetroTabItem Header="{DynamicResource Queue}" x:Name="QueueMetroTabItem">
+                <ScrollViewer x:Name="QueueScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="1200" MaxWidth="1200" >
+                    <StackPanel x:Name="QueueStackPanel">
+                    </StackPanel>
+                </ScrollViewer>
+            </Controls:MetroTabItem>
+
+            <Controls:MetroTabItem Header="{DynamicResource BulkDownload}">
+                <StackPanel>
+                <ScrollViewer x:Name="BulkScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="1200" MaxWidth="1200" >
+                    <TextBox x:Name="BulkLinksTextBox" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" TextChanged="TextBox_TextChanged_1" FontSize="16" MinHeight="100" PreviewDrop="BulkLinksTextBox_PreviewDrop"  />
+                </ScrollViewer>
+                <WrapPanel HorizontalAlignment="Center">
+                        <Controls:Tile Style="{DynamicResource SmallTileStyle}" x:Name="BulkDownloadButton" Title="{DynamicResource Download}" IsEnabled="False" Click="BulkDownloadButton_Click">
+                            <iconPacks:PackIconModern Width="40" Height="40" Kind="ArrowDown" />
+                        </Controls:Tile>
+                    </WrapPanel>
+                </StackPanel>
+            </Controls:MetroTabItem>
+            
+        </Controls:MetroAnimatedTabControl>
+    </StackPanel>
+</UserControl>

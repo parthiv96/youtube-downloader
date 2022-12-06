@@ -1,0 +1,4 @@
+﻿Version 1.9:
+- Added a retry button when a download fails
+- Fixed a bug that switched the subsets options values
+- Updated libraries
